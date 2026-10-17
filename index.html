@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Trabalho de Estatística</title>
 </head>
     <style>
         *{
@@ -18,15 +18,15 @@
 
         header{
             padding: 10px;
-            color:white;
         }
 
-        .header-container{
+        .header-container, .main-container{
             display: flex;
             flex-direction: column;
-            gap: 10px;
+            gap: 15px;
             margin: 0 auto;
             max-width: 800px;
+            color:white;
         }
 
         .title{
@@ -39,9 +39,59 @@
             display: flex;
             justify-content: space-around;
             flex-direction: row;
-            font-size: 1.5rem;
+            font-size: 1.8rem;
             gap: 50px;
             width: 800px;
+        }
+
+        /* Conteúdo Principal */
+
+        .media-content{
+            display: flex;
+            flex-direction: column;
+            margin-top:20px;
+            background-color: rgb(83, 116, 82);
+            gap: 20px;
+            padding: 30px;
+            border-radius: 20px;
+        }
+
+        .subtitle{
+            display: flex;
+            justify-content: center;
+            font-size: 1.7rem;
+        }
+
+        .forms-calc{
+            display:flex;
+            flex-direction: column;
+            gap:12px;
+            max-width: 300px;
+        }
+
+        .forms-calc p{
+            display: flex;
+            font-size: 1.2rem;
+        }
+
+        .forms-calc input, .forms-calc select{
+            font-size: 1.2rem;
+        }
+
+        .calcBtn-box{
+            display: flex;
+            justify-content: center;
+            width: 100%;
+            height: 100%;
+            margin-top: 25px;
+        }
+
+        .calcBtn-box button{
+            width: 300px;
+            height: 30px;
+            font-size: 1.2rem;
+            border-radius: 10px;
+            cursor: pointer;
         }
 
     </style>
@@ -49,7 +99,7 @@
     <header>
         <div class="header-container">
             <div class="title">Trabalho de Estatisica</div>
-            <hr>
+           <hr>
             <div class="info-student"> 
                 <p>Estimação de Parâmetros de Média e Proporção</p>
             </div>
@@ -59,19 +109,72 @@
     <main>
         <div class="main-container">
             <div class="media-content">
+                <div class="subtitle">Estimativa da Média de uma População</div>
                 
+                <form class="forms-calc">
+                    <p>Média Amostral</p>
+                    <input type="text">
+
+                    <p>Desvio padrão amostral</p>
+                    <input type="text">
+
+                    <p>Tamanho da população</p>
+                    <input type="text">
+
+                    <p>Tamanho da Amostra</p>
+                    <input type="text">
+
+                    <p>Grau de confiança</p>
+                    <select name="select-trust">
+                        <option value="opcao1">90%</option>
+                        <option value="opcao2">95%</option>
+                        <option value="opcao3">99%</option>
+                    </select>   
+                </form>
+                <div class="calcBtn-box">
+                    <button>Calcular</button>
+                </div>
             </div>
 
+            <br>
 
             <div class="proporcao-container">
+                <div class="media-content">
+                <div class="subtitle">Estimativa da Proporção de uma População</div>
+                
+                <form class="forms-calc">
+                    <p>Média Amostral</p>
+                    <input type="text">
 
+                    <p>Desvio padrão normal (z)</p>
+                    <input type="text">
+
+                    <p>Tamanho da população (N)</p>
+                    <input type="text">
+
+                    <p>Tamanho da Amostra (n)</p>
+                    <input type="text">
+
+                    <p>Número de itens na amostra (x)</p>
+                    <input type="text">
+
+                    <p>Grau de confiança</p>
+                    <select name="select-trust">
+                        <option value="opcao1">90%</option>
+                        <option value="opcao2">95%</option>
+                        <option value="opcao3">99%</option>
+                    </select>   
+                </form>
+                <div class="calcBtn-box">
+                    <button>Calcular</button>
+                </div>
             </div>
         </div>
     </main>
 
     <footer>
         <div class="footer-container">
-            
+
         </div>
     </footer>
     
