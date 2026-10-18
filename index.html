@@ -25,7 +25,7 @@
             flex-direction: column;
             gap: 15px;
             margin: 0 auto;
-            max-width: 800px;
+            max-width: 950px;
             color:white;
         }
 
@@ -46,13 +46,13 @@
 
         /* Conteúdo Principal */
 
-        .media-content{
+        .media-content, .proporcao-content{
             display: flex;
             flex-direction: column;
             margin-top:20px;
             background-color: rgb(83, 116, 82);
             gap: 20px;
-            padding: 50px;
+            padding: 40px;
             margin: 40px;
             border-radius: 20px;
         }
@@ -69,6 +69,15 @@
             gap:12px;
             max-width: 300px;
         }
+
+        .forms-calc input{
+            padding: 3px;
+            color: black;
+            border-radius: 3px;
+            outline: none;
+            border:none;
+        }
+
 
         .forms-calc p{
             display: flex;
@@ -95,6 +104,22 @@
             cursor: pointer;
         }
 
+        .result{
+            display: none;
+            justify-content: space-around;
+            flex-direction: row;
+            gap: 10px;
+            width: 100%;
+            margin-top: 20px
+        }
+
+        .media-pontual, .media-intervalar, .media-erro, .proporcao-pontual, .proporcao-intervalar, .proporcao-erro{
+            display: flex;
+            background-color: rgb(63, 102, 67);
+            padding: 15px;
+            font-size: 1.2rem;
+            border-radius: 10px;
+        }
         /* Footer */
 
         footer{
@@ -103,6 +128,7 @@
             padding: 30px;
             background-color: rgb(83, 116, 82);
             color: white;
+            margin-top: 45px;
         }
 
         .footer-container {
@@ -113,10 +139,9 @@
             width:100%;
             gap: 15px;
             max-width: 800px;
-            font-size: 1.3rem;
+            font-size: 1.2rem;
         }
       
-
     </style>
 <body>
     <header>
@@ -136,62 +161,71 @@
                 
                 <form class="forms-calc">
                     <p>Média Amostral</p>
-                    <input type="text">
+                    <input type="text" id="media-amostral">
 
                     <p>Desvio padrão amostral</p>
-                    <input type="text">
+                    <input type="text" id="desvio-amostral">
 
                     <p>Tamanho da população</p>
-                    <input type="text">
+                    <input type="text" id="media-tamanho-populacao">
 
                     <p>Tamanho da Amostra</p>
-                    <input type="text">
+                    <input type="text" id="media-tamanho-amostra">
 
                     <p>Grau de confiança</p>
-                    <select name="select-trust">
-                        <option value="opcao1">90%</option>
-                        <option value="opcao2">95%</option>
-                        <option value="opcao3">99%</option>
+                    <select id="media-confianca">
+                        <option value="1.65">90%</option>
+                        <option value="1.96">95%</option>
+                        <option value="2.58">99%</option>
                     </select>   
                 </form>
                 <div class="calcBtn-box">
-                    <button>Calcular</button>
+                    <button id="btn-media">Calcular</button>
+                </div>
+                <div class="result" id="result-media">
+                    <div class="media-pontual"></div>
+                    <div class="media-intervalar"></div>
+                    <div class="media-erro"></div>
                 </div>
             </div>
 
             <br>
 
             <div class="proporcao-container">
-                <div class="media-content">
-                <div class="subtitle">Estimativa da Proporção de uma População</div>
-                
-                <form class="forms-calc">
-                    <p>Média Amostral</p>
-                    <input type="text">
+                <div class="proporcao-content">
+                    <div class="subtitle">Estimativa da Proporção de uma População</div>
+                    
+                    <form class="forms-calc">
+                        <p>Proporção Populacional</p>
+                        <input type="text" id="proporcao-populacao">
 
-                    <p>Desvio padrão normal (z)</p>
-                    <input type="text">
+                        <p>Tamanho da população</p>
+                        <input type="text" id="proporcao-tamanho-populacao">
 
-                    <p>Tamanho da população (N)</p>
-                    <input type="text">
+                        <p>Tamanho da Amostra</p>
+                        <input type="text" id="proporcao-tamanho-amostra">
 
-                    <p>Tamanho da Amostra (n)</p>
-                    <input type="text">
+                        <p>Número de itens na amostra</p>
+                        <input type="text" id="proporcao-num-itens-amostra">
 
-                    <p>Número de itens na amostra (x)</p>
-                    <input type="text">
+                        <p>Grau de confiança</p>
+                        <select id="proporcao-confianca">
+                            <option value="1.65">90%</option>
+                            <option value="1.96">95%</option>
+                            <option value="2.58">99%</option>
+                        </select>   
+                    </form>
+                    <div class="calcBtn-box">
+                        <button id="btn-proporcao">Calcular</button>
+                    </div>
 
-                    <p>Grau de confiança</p>
-                    <select name="select-trust">
-                        <option value="opcao1">90%</option>
-                        <option value="opcao2">95%</option>
-                        <option value="opcao3">99%</option>
-                    </select>   
-                </form>
-                <div class="calcBtn-box">
-                    <button>Calcular</button>
+                    <div class="result" id="result-proporcao">
+                        <div class="proporcao-pontual"></div>
+                        <div class="proporcao-intervalar"></div>
+                        <div class="proporcao-erro"></div>
+                    </div>
                 </div>
-            </div>
+            </div>    
         </div>
     </main>
 
@@ -203,6 +237,91 @@
     </footer>
     
     <script>
+        let mediabtn = document.getElementById("btn-media")
+        let proporcaobtn = document.getElementById("btn-proporcao")
+        let resultMedia = document.getElementById("result-media")
+        let resultProporcao = document.getElementById("result-proporcao")
+        let mediaErro = 0;
+        let proporcaoErro = 0;
+        let resultIntervalarNegativo = 0
+        let resultIntervalarPositivo = 0
+
+        mediabtn.addEventListener("click", () =>{
+            let mediaAmostral = parseFloat(document.getElementById("media-amostral").value.replace(",","."))
+            let desvioPadrao = parseFloat(document.getElementById("desvio-amostral").value.replace(",","."))
+            let tamanhoPopulacao = parseFloat(document.getElementById("media-tamanho-populacao").value.replace(/\./g,""))
+            let tamanhoAmostra = parseFloat(document.getElementById("media-tamanho-amostra").value.replace(/\./g,""))
+            let z = Number(document.getElementById("media-confianca").value)    
+           
+            let mediaPontual = document.querySelector(".media-pontual");
+            let mediaEscalar = document.querySelector(".media-intervalar");
+            let resultErroMedia = document.querySelector(".media-erro")
+
+            if(Number.isNaN(mediaAmostral) || Number.isNaN(desvioPadrao) || Number.isNaN(tamanhoAmostra)){
+                alert("Um dos campos para calcular a média não foi preenchido")
+            }else if(tamanhoAmostra > tamanhoPopulacao){
+                alert("A amostra não pode ser maior que a população")
+            }else{
+                if(Number.isNaN(tamanhoPopulacao) || (tamanhoAmostra/tamanhoPopulacao) < 5/100){
+                    resultIntervalarPositivo =  (mediaAmostral + z * (desvioPadrao / Math.sqrt(tamanhoAmostra))).toFixed(2);
+                    resultIntervalarNegativo = (mediaAmostral - z * (desvioPadrao / Math.sqrt(tamanhoAmostra))).toFixed(2)
+                    mediaErro = (z * (desvioPadrao / Math.sqrt(tamanhoAmostra))).toFixed(2)
+                }else{
+                    resultIntervalarPositivo = (mediaAmostral + (z * (desvioPadrao / Math.sqrt(tamanhoAmostra)) * Math.sqrt((tamanhoPopulacao - tamanhoAmostra) / (tamanhoPopulacao - 1)))).toFixed(2)
+                    resultIntervalarNegativo = (mediaAmostral - (z * (desvioPadrao / Math.sqrt(tamanhoAmostra)) * Math.sqrt((tamanhoPopulacao - tamanhoAmostra) / (tamanhoPopulacao - 1)))).toFixed(2)
+                    mediaErro = (z * (desvioPadrao / Math.sqrt(tamanhoAmostra)) * Math.sqrt((tamanhoPopulacao - tamanhoAmostra) / (tamanhoPopulacao - 1))).toFixed(2)
+                }
+                let resultadoPontual = mediaAmostral.toFixed(2)
+
+                mediaPontual.textContent = "Estimativa Pontual: " + resultadoPontual.replace(".",",");
+                mediaEscalar.textContent = "Estimativa Intervalar: " + resultIntervalarNegativo.replace(".",",") + " e " + resultIntervalarPositivo.replace(".",",")
+                resultErroMedia.textContent = "Erro: " + mediaErro.replace(".",",")
+                resultMedia.style.display = "flex"
+
+            }
+        })    
+            proporcaobtn.addEventListener("click", () =>{
+                let proporcaoPopulacional = parseFloat(document.getElementById("proporcao-populacao").value.replace(",","."))
+                let tamanhoPopulacao = parseFloat(document.getElementById("proporcao-tamanho-populacao").value.replace(/\./g,""))
+                let tamanhoAmostra = parseFloat(document.getElementById("proporcao-tamanho-amostra").value.replace(/\./g,""))
+                let numItensAmostra = parseFloat(document.getElementById("proporcao-num-itens-amostra").value.replace(/\./g,""))
+                let z = Number(document.getElementById("proporcao-confianca").value) 
+
+                let proporcaoPontual = document.querySelector(".proporcao-pontual");
+                let proporcaoEscalar = document.querySelector(".proporcao-intervalar");
+                let resultErroProporcao = document.querySelector(".proporcao-erro")
+            
+                //Caso proporção venha vazia, calcula ela
+                proporcaoPopulacional = Number.isNaN(proporcaoPopulacional) ? (numItensAmostra/tamanhoAmostra) : proporcaoPopulacional
+                console.log(proporcaoPopulacional)
+                if(Number.isNaN(proporcaoPopulacional) || Number.isNaN(tamanhoAmostra)){
+                    alert("Um dos campos para calcular a proporção não foi preenchido")
+                } else if(proporcaoPopulacional < 0 || proporcaoPopulacional > 1){
+                    alert("A proporção deve estar entre 0 e 1 (ex.: 0,5)")
+                } else if(tamanhoAmostra > tamanhoPopulacao){
+                    alert("A amostra não pode ser maior que a população")
+                } else{
+                if(Number.isNaN(tamanhoPopulacao) || (tamanhoAmostra/tamanhoPopulacao) < 5/100){
+                    resultIntervalarPositivo =  proporcaoPopulacional + z * (Math.sqrt(proporcaoPopulacional*(1-proporcaoPopulacional)/tamanhoAmostra));
+                    resultIntervalarNegativo = proporcaoPopulacional - z * (Math.sqrt(proporcaoPopulacional*(1-proporcaoPopulacional)/tamanhoAmostra));
+                    proporcaoErro = z * (Math.sqrt(proporcaoPopulacional*(1-proporcaoPopulacional)/tamanhoAmostra));
+                    console.log(1)
+                    
+                }else{
+                    resultIntervalarPositivo = proporcaoPopulacional + z * (Math.sqrt(proporcaoPopulacional*(1-proporcaoPopulacional)/tamanhoAmostra) * Math.sqrt((tamanhoPopulacao - tamanhoAmostra) / (tamanhoPopulacao - 1)))
+                    resultIntervalarNegativo = proporcaoPopulacional - z * (Math.sqrt(proporcaoPopulacional*(1-proporcaoPopulacional)/tamanhoAmostra) * Math.sqrt((tamanhoPopulacao - tamanhoAmostra) / (tamanhoPopulacao - 1)))
+                    proporcaoErro = z * (Math.sqrt(proporcaoPopulacional*(1-proporcaoPopulacional)/tamanhoAmostra)* Math.sqrt((tamanhoPopulacao - tamanhoAmostra) / (tamanhoPopulacao - 1)))
+                    console.log(2)
+                }
+                
+                let resultadoPontual = proporcaoPopulacional
+
+                proporcaoPontual.textContent = "Estimativa Pontual: " + (resultadoPontual * 100).toFixed(2).replace(".",",") + "%"
+                proporcaoEscalar.textContent = "Estimativa Intervalar: " + (resultIntervalarNegativo * 100).toFixed(2).replace(".",",") + "%" + " e " + (resultIntervalarPositivo *100).toFixed(2).replace(".",",")  + "%"
+                resultErroProporcao.textContent = "Erro: " + (proporcaoErro * 100).toFixed(2).replace(".",",") + "%"
+                resultProporcao.style.display = "flex"
+                }
+            })
 
     </script>
 </body>
